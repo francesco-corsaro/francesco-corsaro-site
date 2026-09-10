@@ -3,6 +3,8 @@ import { NextResponse } from 'next/server';
 const MAX_NAME = 100;
 const MAX_CONTACT = 160;
 const MAX_MESSAGE = 2000;
+const MIN_FILL_TIME_MS = 1200;
+const MAX_FILL_TIME_MS = 2 * 60 * 60 * 1000;
 
 function clean(value: unknown, max: number) {
   return String(value ?? '').trim().slice(0, max);
@@ -16,10 +18,18 @@ export async function POST(request: Request) {
     const message = clean(body.message, MAX_MESSAGE);
     const website = clean(body.website, 200);
     const privacy = body.privacy === true;
+    const startedAt = Number(body.startedAt);
+    const elapsed = Number.isFinite(startedAt) ? Date.now() - startedAt : 0;
 
+    // Honeypot: ai bot che compilano il campo invisibile viene restituito un falso esito positivo.
     if (website) return NextResponse.json({ ok: true });
+
     if (!name || !contact || !message || !privacy) {
       return NextResponse.json({ message: 'Compila tutti i campi richiesti e conferma di aver letto l’informativa privacy.' }, { status: 400 });
+    }
+
+    if (message.length < 3 || elapsed < MIN_FILL_TIME_MS || elapsed > MAX_FILL_TIME_MS) {
+      return NextResponse.json({ message: 'Non è stato possibile validare il modulo. Ricarica la pagina e riprova.' }, { status: 400 });
     }
 
     const apiKey = process.env.RESEND_API_KEY;
@@ -40,7 +50,7 @@ export async function POST(request: Request) {
         from,
         to: [destination],
         subject: `Richiesta dal sito - ${name}`,
-        text: `Nome: ${name}\nRecapito: ${contact}\n\nMessaggio:\n${message}\n\nOrigine: modulo contatti francescocorsaro.it`,
+        text: `Nome: ${name}\nRecapito: ${contact}\n\nMessaggio:\n${message}\n\nOrigine: modulo contatti del sito di Francesco Corsaro`,
       }),
       cache: 'no-store',
     });
