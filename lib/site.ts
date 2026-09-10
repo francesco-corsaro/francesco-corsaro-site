@@ -4,12 +4,19 @@ export const site = {
   city: 'Catania',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || '[DA INSERIRE]',
-  phone: process.env.NEXT_PUBLIC_PHONE || '[DA INSERIRE]',
-  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || '[DA CONFERMARE]',
+  phone: process.env.NEXT_PUBLIC_PHONE || '+39 348 568 6702',
+  phoneHref: 'tel:+393485686702',
+  whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || '+39 348 568 6702',
+  whatsappHref: 'https://wa.me/393485686702',
   address: process.env.NEXT_PUBLIC_STUDIO_ADDRESS || '[DA INSERIRE]',
-  orderNumber: process.env.NEXT_PUBLIC_ORDER_NUMBER || '[DA INSERIRE]',
+  orderNumber: process.env.NEXT_PUBLIC_ORDER_NUMBER || '10083-A',
+  orderRegion: 'Sicilia',
   vat: process.env.NEXT_PUBLIC_VAT_NUMBER || '[DA INSERIRE]',
-  onlineTherapy: process.env.NEXT_PUBLIC_ONLINE_THERAPY === 'true',
+  onlineTherapy: process.env.NEXT_PUBLIC_ONLINE_THERAPY
+    ? process.env.NEXT_PUBLIC_ONLINE_THERAPY === 'true'
+    : true,
+  sessionDuration: 50,
+  photo: '/a0045d7b-d706-4c43-9065-156ba743ea10.jpg',
 };
 
 export const nav = [
