@@ -1,8 +1,9 @@
 "use client";
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { nav } from '@/lib/site';
+import { nav, site } from '@/lib/site';
 
 export function Header() {
   const [open, setOpen] = useState(false);
@@ -10,7 +11,9 @@ export function Header() {
     <header className="site-header">
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label="Francesco Corsaro, homepage">
-          <span className="brand-mark" aria-hidden="true">FC</span>
+          <span className="brand-logo" aria-hidden="true">
+            <Image src={site.logo} alt="" width={52} height={52} priority />
+          </span>
           <span><strong>Francesco Corsaro</strong><small>Psicologo · Psicoterapeuta</small></span>
         </Link>
         <button className="menu-toggle" aria-expanded={open} aria-controls="main-nav" onClick={() => setOpen(!open)}>
