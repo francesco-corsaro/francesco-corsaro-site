@@ -4,6 +4,7 @@ import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
 import { site } from '@/lib/site';
 import './globals.css';
+import './identity.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -29,12 +30,14 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
       {
         '@type': 'Person', '@id': `${site.url}/#person`, name: site.name,
         jobTitle: 'Psicologo e Psicoterapeuta',
+        telephone: site.phone,
         address: structuredAddress,
         knowsAbout: ['Psicoterapia cognitiva complessa','Ansia','ADHD','Autismo','Adolescenza','Parent training']
       },
       {
         '@type': 'ProfessionalService', '@id': `${site.url}/#practice`, name: `${site.name} - Psicologo e Psicoterapeuta`,
         url: site.url,
+        telephone: site.phone,
         areaServed: { '@type':'City', name:'Catania' },
         founder: { '@id': `${site.url}/#person` },
         address: structuredAddress
