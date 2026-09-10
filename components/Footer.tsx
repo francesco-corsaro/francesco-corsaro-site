@@ -13,9 +13,10 @@ export function Footer() {
         <div><h2 className="footer-heading">Aree</h2>{areas.slice(0,4).map(a => <Link key={a.href} href={a.href}>{a.title}</Link>)}</div>
         <div>
           <h2 className="footer-heading">Dati professionali</h2>
-          <p>Ordine degli Psicologi: {site.orderNumber}</p>
+          <p>Ordine degli Psicologi della Regione Siciliana: n. {site.orderNumber}</p>
           <p>Partita IVA: {site.vat}</p>
           <p>Studio: {site.address}</p>
+          <p>Telefono: <a href={site.phoneHref}>{site.phone}</a></p>
           <Link href="/privacy">Privacy Policy</Link>
           <Link href="/cookie-policy">Cookie Policy</Link>
         </div>
