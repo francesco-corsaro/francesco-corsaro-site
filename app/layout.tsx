@@ -21,9 +21,14 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
-  const structuredAddress = site.address.startsWith('[')
-    ? { '@type':'PostalAddress', addressLocality:'Catania', addressCountry:'IT' }
-    : { '@type':'PostalAddress', streetAddress: site.address, addressLocality:'Catania', addressCountry:'IT' };
+  const structuredAddress = {
+    '@type': 'PostalAddress',
+    streetAddress: site.streetAddress,
+    postalCode: site.postalCode,
+    addressLocality: 'Catania',
+    addressRegion: 'Sicilia',
+    addressCountry: 'IT'
+  };
   const jsonLd = {
     '@context': 'https://schema.org',
     '@graph': [
@@ -31,13 +36,18 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
         '@type': 'Person', '@id': `${site.url}/#person`, name: site.name,
         jobTitle: 'Psicologo e Psicoterapeuta',
         telephone: site.phone,
+        email: site.email,
+        image: `${site.url}${site.photo}`,
         address: structuredAddress,
         knowsAbout: ['Psicoterapia cognitiva complessa','Ansia','ADHD','Autismo','Adolescenza','Parent training']
       },
       {
         '@type': 'ProfessionalService', '@id': `${site.url}/#practice`, name: `${site.name} - Psicologo e Psicoterapeuta`,
         url: site.url,
+        logo: `${site.url}${site.logo}`,
+        image: `${site.url}${site.photo}`,
         telephone: site.phone,
+        email: site.email,
         areaServed: { '@type':'City', name:'Catania' },
         founder: { '@id': `${site.url}/#person` },
         address: structuredAddress
