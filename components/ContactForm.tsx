@@ -6,6 +6,7 @@ import { FormEvent, useState } from 'react';
 export function ContactForm() {
   const [status, setStatus] = useState('');
   const [sending, setSending] = useState(false);
+  const [startedAt, setStartedAt] = useState(() => Date.now());
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -24,12 +25,14 @@ export function ContactForm() {
           message: String(form.get('message') || ''),
           website: String(form.get('website') || ''),
           privacy: form.get('privacy') === 'on',
+          startedAt,
         }),
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data?.message || 'Invio non riuscito.');
       setStatus('Messaggio inviato. Ti ricontatterò utilizzando il recapito indicato.');
       formElement.reset();
+      setStartedAt(Date.now());
     } catch (error) {
       setStatus(error instanceof Error ? error.message : 'Non è stato possibile inviare il messaggio. Puoi contattarmi telefonicamente o via WhatsApp.');
     } finally {
