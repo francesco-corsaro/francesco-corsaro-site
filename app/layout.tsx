@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
-import { CookieConsent } from '@/components/CookieConsent';
 import { isPublicSite, site } from '@/lib/site';
 import './globals.css';
 import './identity.css';
@@ -55,6 +54,6 @@ export default function RootLayout({children}:{children:React.ReactNode}) {
     ]
   };
   return (
-    <html lang="it"><body><a className="skip" href="#contenuto">Vai al contenuto</a><Header/><main id="contenuto">{children}</main><Footer/><CookieConsent/><a className="mobile-cta" href="/contatti">Richiedi un colloquio</a><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}} /></body></html>
+    <html lang="it"><body><a className="skip" href="#contenuto">Vai al contenuto</a><Header/><main id="contenuto">{children}</main><Footer/><a className="mobile-cta" href="/contatti">Richiedi un colloquio</a><script type="application/ld+json" dangerouslySetInnerHTML={{__html: JSON.stringify(jsonLd)}} /></body></html>
   );
 }
