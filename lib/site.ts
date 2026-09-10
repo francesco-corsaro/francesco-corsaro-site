@@ -8,7 +8,9 @@ export const site = {
   phoneHref: 'tel:+393485686702',
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || '+39 348 568 6702',
   whatsappHref: 'https://wa.me/393485686702',
-  address: process.env.NEXT_PUBLIC_STUDIO_ADDRESS || '[DA INSERIRE]',
+  address: process.env.NEXT_PUBLIC_STUDIO_ADDRESS || 'Via Passo Gravina 137, 95125 Catania',
+  streetAddress: 'Via Passo Gravina 137',
+  postalCode: '95125',
   orderNumber: process.env.NEXT_PUBLIC_ORDER_NUMBER || '10083-A',
   orderRegion: 'Sicilia',
   vat: process.env.NEXT_PUBLIC_VAT_NUMBER || '[DA INSERIRE]',
@@ -17,6 +19,7 @@ export const site = {
     : true,
   sessionDuration: 50,
   photo: '/a0045d7b-d706-4c43-9065-156ba743ea10.jpg',
+  logo: '/logo-francesco-corsaro.png',
 };
 
 export const nav = [
