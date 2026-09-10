@@ -3,7 +3,7 @@ export const site = {
   role: 'Psicologo | Psicoterapeuta',
   city: 'Catania',
   url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
-  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || '[DA INSERIRE]',
+  email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'corsaro.francesco.psi@gmail.com',
   phone: process.env.NEXT_PUBLIC_PHONE || '+39 348 568 6702',
   phoneHref: 'tel:+393485686702',
   whatsapp: process.env.NEXT_PUBLIC_WHATSAPP || '+39 348 568 6702',
