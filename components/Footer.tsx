@@ -3,6 +3,7 @@ import Link from 'next/link';
 import { areas, nav, site } from '@/lib/site';
 
 export function Footer() {
+  const hasVat = !site.vat.startsWith('[');
   return (
     <footer className="footer">
       <div className="container footer-grid">
@@ -18,7 +19,7 @@ export function Footer() {
         <div>
           <h2 className="footer-heading">Dati professionali</h2>
           <p>Ordine degli Psicologi della Regione Siciliana: n. {site.orderNumber}</p>
-          <p>Partita IVA: {site.vat}</p>
+          {hasVat && <p>Partita IVA: {site.vat}</p>}
           <p>Studio: {site.address}</p>
           <p>Telefono: <a href={site.phoneHref}>{site.phone}</a></p>
           <p>Email: <a href={`mailto:${site.email}`}>{site.email}</a></p>
