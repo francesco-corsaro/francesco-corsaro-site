@@ -1,0 +1,5 @@
+import type { Metadata } from 'next';
+import { AreaCard } from '@/components/AreaCard';
+import { areas } from '@/lib/site';
+export const metadata: Metadata = { title:'Aree di intervento', description:'Ansia, ADHD, autismo e neurodivergenze, adolescenza, giovani adulti e parent training a Catania con Francesco Corsaro.', alternates:{canonical:'/aree-di-intervento'}, openGraph:{title:'Aree di intervento | Francesco Corsaro',description:'Ansia, ADHD, autismo, adolescenza, giovani adulti e parent training a Catania.'} };
+export default function Page(){return <><section className="page-hero"><div className="container narrow"><span className="eyebrow">Aree di intervento</span><h1>Comprendere il problema nel contesto in cui accade.</h1><p className="lead">Le stesse difficoltà possono avere funzioni e significati differenti da persona a persona. Per questo ogni area viene affrontata a partire dal funzionamento individuale.</p></div></section><section className="section"><div className="container card-grid">{areas.map(a=><AreaCard key={a.href} {...a}/>)}</div></section></>}
