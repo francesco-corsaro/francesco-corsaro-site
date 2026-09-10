@@ -22,6 +22,8 @@ export const site = {
   logo: '/logo-francesco-corsaro.png',
 };
 
+export const isPublicSite = site.url.startsWith('https://') && !site.url.includes('localhost') && !site.url.includes('vercel.app');
+
 export const nav = [
   { href: '/', label: 'Home' },
   { href: '/chi-sono', label: 'Chi sono' },
