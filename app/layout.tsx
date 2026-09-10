@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { CookieConsent } from '@/components/CookieConsent';
-import { site } from '@/lib/site';
+import { isPublicSite, site } from '@/lib/site';
 import './globals.css';
 import './identity.css';
 
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     title: 'Psicologo e Psicoterapeuta a Catania | Francesco Corsaro',
     description: 'Comprendere il proprio funzionamento per costruire nuove possibilità di cambiamento.'
   },
-  robots: { index: true, follow: true }
+  robots: { index: isPublicSite, follow: isPublicSite }
 };
 
 export default function RootLayout({children}:{children:React.ReactNode}) {
