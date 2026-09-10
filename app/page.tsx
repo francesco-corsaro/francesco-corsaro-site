@@ -1,7 +1,8 @@
+import Image from 'next/image';
 import Link from 'next/link';
 import { AreaCard } from '@/components/AreaCard';
 import { ComplexMind } from '@/components/ComplexMind';
-import { areas } from '@/lib/site';
+import { areas, site } from '@/lib/site';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = { alternates:{canonical:'/'}, openGraph:{title:'Psicologo e Psicoterapeuta a Catania | Francesco Corsaro',description:'Comprendere il proprio funzionamento per costruire nuove possibilità di cambiamento.'} };
@@ -17,10 +18,9 @@ export default function Home() {
           <div className="actions"><Link className="btn" href="/contatti">Richiedi un primo colloquio</Link><Link className="btn btn-ghost" href="/come-lavoro">Scopri il mio approccio</Link></div>
           <p className="microcopy">Capire cosa mantiene una difficoltà è spesso il primo passo per poter intervenire su di essa.</p>
         </div>
-        <div className="portrait-placeholder" role="img" aria-label="Spazio per una fotografia professionale di Francesco Corsaro">
-          <div className="portrait-art" aria-hidden="true"><span></span><span></span><span></span></div>
-          <div><strong>Fotografia professionale</strong><p>[DA INSERIRE: ritratto autentico di Francesco]</p></div>
-        </div>
+        <figure className="portrait-card">
+          <Image src={site.photo} alt="Francesco Corsaro, psicologo e psicoterapeuta a Catania" fill priority sizes="(max-width: 900px) 100vw, 38vw" className="portrait-image" />
+        </figure>
       </div>
     </section>
 
@@ -49,7 +49,7 @@ export default function Home() {
     </section>
 
     <section className="section">
-      <div className="container about-grid"><div className="abstract-panel" aria-hidden="true"><div className="orbit o1"></div><div className="orbit o2"></div><div className="dot d1"></div><div className="dot d2"></div><div className="dot d3"></div></div><div>
+      <div className="container about-grid"><figure className="about-photo"><Image src={site.photo} alt="Francesco Corsaro" fill sizes="(max-width: 900px) 100vw, 42vw" className="portrait-image" /></figure><div>
         <span className="eyebrow">Chi sono</span><h2>Lavoro cercando di capire prima di spiegare.</h2>
         <p>Nel mio modo di lavorare, la diagnosi può essere utile per orientarsi, ma non esaurisce la comprensione della persona. Cerco di ricostruire insieme al paziente come una difficoltà si inserisce nella sua storia, nelle relazioni, nelle abitudini quotidiane e nei meccanismi con cui prova a regolare emozioni e stress.</p>
         <p>Sono laureato in Psicologia Clinica, psicologo e psicoterapeuta. Ho completato una formazione quadriennale in Psicoterapia Cognitiva Complessa presso ALETEIA e ho maturato esperienza con adolescenti, ADHD, disturbi del neurosviluppo, persone autistiche e famiglie. Mantengo un interesse specifico per neuroscienze, psicofisiologia e processi di autoregolazione.</p>
