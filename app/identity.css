@@ -1,0 +1,63 @@
+.portrait-card,
+.about-photo {
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  background: var(--sage-soft);
+  box-shadow: var(--shadow);
+}
+
+.portrait-card {
+  min-height: 560px;
+  border-radius: 32px 32px 110px 32px;
+}
+
+.about-photo {
+  min-height: 520px;
+  border-radius: 180px 32px 32px 32px;
+}
+
+.portrait-image {
+  object-fit: cover;
+  object-position: center 28%;
+}
+
+.form-help {
+  margin: -8px 0 2px;
+  color: var(--muted);
+  font-size: .88rem;
+  line-height: 1.5;
+}
+
+.hp-field {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+  clip: rect(0 0 0 0) !important;
+  white-space: nowrap !important;
+  clip-path: inset(50%) !important;
+}
+
+.contact-form button:disabled {
+  opacity: .62;
+  cursor: wait;
+  transform: none;
+}
+
+.legal-copy a,
+.contact-data a,
+.check a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+@media (max-width: 900px) {
+  .portrait-card { min-height: 480px; }
+  .about-photo { min-height: 430px; border-radius: 110px 28px 28px 28px; }
+}
+
+@media (max-width: 640px) {
+  .portrait-card { min-height: 390px; border-radius: 26px 26px 78px 26px; }
+  .about-photo { min-height: 380px; border-radius: 88px 24px 24px 24px; }
+}
