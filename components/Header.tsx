@@ -2,13 +2,19 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { nav, site } from '@/lib/site';
 
 export function Header() {
   const [open, setOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
   return (
-    <header className="site-header">
+    <header className="site-header" onKeyDown={(event) => {
+      if (event.key === 'Escape' && open) {
+        setOpen(false);
+        menuButton.current?.focus();
+      }
+    }}>
       <div className="container header-inner">
         <Link className="brand" href="/" aria-label="Francesco Corsaro, homepage">
           <span className="brand-logo" aria-hidden="true">
@@ -16,8 +22,8 @@ export function Header() {
           </span>
           <span><strong>Francesco Corsaro</strong><small>Psicologo · Psicoterapeuta</small></span>
         </Link>
-        <button className="menu-toggle" aria-expanded={open} aria-controls="main-nav" onClick={() => setOpen(!open)}>
-          <span className="sr-only">Apri menu</span>
+        <button ref={menuButton} type="button" className="menu-toggle" aria-expanded={open} aria-controls="main-nav" onClick={() => setOpen(!open)}>
+          <span className="sr-only">{open ? 'Chiudi menu' : 'Apri menu'}</span>
           <span aria-hidden="true">{open ? 'Chiudi' : 'Menu'}</span>
         </button>
         <nav id="main-nav" className={open ? 'nav open' : 'nav'} aria-label="Navigazione principale">
