@@ -1,5 +1,12 @@
-import type { Metadata } from 'next';
-export const metadata: Metadata = { title:'FAQ', description:'Domande frequenti su primo colloquio, psicoterapia, adolescenti, parent training, ADHD e orientamento terapeutico.', alternates:{canonical:'/faq'}, openGraph:{title:'FAQ | Francesco Corsaro',description:'Domande frequenti su primo colloquio, psicoterapia, adolescenti, ADHD e parent training.'} };
+import { BreadcrumbJsonLd, JsonLd } from '@/components/SeoJsonLd';
+import { pageMetadata } from '@/lib/seo';
+
+export const metadata = pageMetadata({
+  title: 'FAQ',
+  description: 'Domande frequenti su primo colloquio, psicoterapia, adolescenti, ADHD, parent training e incontri online con Francesco Corsaro.',
+  path: '/faq'
+});
+
 const faqs=[
 ['Come funziona il primo colloquio?','Serve a comprendere il motivo della richiesta, cosa sta accadendo in questo momento e quali aspetti meritano di essere approfonditi. È anche uno spazio per capire se il modo di lavorare proposto può essere adatto alla situazione.'],
 ['Quanto dura una seduta?','Una seduta dura 50 minuti.'],
@@ -12,4 +19,18 @@ const faqs=[
 ['Qual è il tuo orientamento psicoterapeutico?','Psicoterapia Cognitiva Complessa, con riferimenti al cognitivismo, costruttivismo, psicologia dello sviluppo, sistemi complessi, psicofisiologia e neuroscienze.'],
 ['È possibile svolgere gli incontri online?','Sì, è prevista anche la possibilità di svolgere colloqui e percorsi online, quando appropriato alla situazione e concordato insieme.']
 ];
-export default function Page(){return <><section className="page-hero"><div className="container narrow"><span className="eyebrow">FAQ</span><h1>Domande frequenti prima di iniziare.</h1><p className="lead">Informazioni concrete per capire come funziona il primo contatto e come viene impostato il lavoro.</p></div></section><section className="section"><div className="container faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></section></>}
+
+export default function Page(){
+  const faqJsonLd={
+    '@context':'https://schema.org',
+    '@type':'FAQPage',
+    mainEntity:faqs.map(([q,a])=>({
+      '@type':'Question',
+      name:q,
+      acceptedAnswer:{'@type':'Answer',text:a}
+    }))
+  };
+  return <>
+  <BreadcrumbJsonLd items={[{name:'Home',path:'/'},{name:'FAQ',path:'/faq'}]} />
+  <JsonLd data={faqJsonLd} />
+  <section className="page-hero"><div className="container narrow"><span className="eyebrow">FAQ</span><h1>Domande frequenti prima di iniziare.</h1><p className="lead">Informazioni concrete per capire come funziona il primo contatto e come viene impostato il lavoro.</p></div></section><section className="section"><div className="container faq-list">{faqs.map(([q,a])=><details key={q}><summary>{q}</summary><p>{a}</p></details>)}</div></section></>}
