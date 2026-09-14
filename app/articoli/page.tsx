@@ -1,10 +1,11 @@
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata:Metadata={
+export const metadata=pageMetadata({
   title:'Articoli',
   description:'Approfondimenti divulgativi su ansia, ADHD, autismo, adolescenza, genitorialità, psicoterapia e neuroscienze.',
-  robots:{index:false,follow:true}
-};
+  path:'/articoli',
+  noIndex:true
+});
 
 const cats=['Ansia','ADHD','Autismo','Adolescenza','Genitorialità','Psicoterapia','Mente e neuroscienze'];
 
