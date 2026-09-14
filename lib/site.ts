@@ -22,7 +22,12 @@ export const site = {
   logo: '/logo-francesco-corsaro.png',
 };
 
-export const isPublicSite = site.url.startsWith('https://') && !site.url.includes('localhost') && !site.url.includes('vercel.app');
+const isProductionDeployment = !process.env.VERCEL_ENV || process.env.VERCEL_ENV === 'production';
+export const isPublicSite =
+  isProductionDeployment &&
+  site.url.startsWith('https://') &&
+  !site.url.includes('localhost') &&
+  !site.url.includes('vercel.app');
 
 export const nav = [
   { href: '/', label: 'Home' },

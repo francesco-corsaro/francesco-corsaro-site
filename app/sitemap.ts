@@ -1,10 +1,12 @@
 import { MetadataRoute } from 'next';
-import { site, areas } from '@/lib/site';
+import { areas, isPublicSite, site } from '@/lib/site';
 
-export default function sitemap():MetadataRoute.Sitemap {
+export default function sitemap(): MetadataRoute.Sitemap {
+  if (!isPublicSite) return [];
+
   const base=['','/chi-sono','/come-lavoro','/aree-di-intervento','/faq','/contatti'];
   return [
-    ...base.map(url=>({url:`${site.url}${url}`,changeFrequency:'monthly' as const,priority:url===''?1:0.7})),
-    ...areas.map(a=>({url:`${site.url}${a.href}`,changeFrequency:'monthly' as const,priority:0.8}))
+    ...base.map(path=>({url:new URL(path || '/', `${site.url}/`).toString()})),
+    ...areas.map(area=>({url:new URL(area.href, `${site.url}/`).toString()}))
   ];
 }

@@ -3,9 +3,13 @@ import Link from 'next/link';
 import { AreaCard } from '@/components/AreaCard';
 import { ComplexMind } from '@/components/ComplexMind';
 import { areas, site } from '@/lib/site';
-import type { Metadata } from 'next';
+import { pageMetadata } from '@/lib/seo';
 
-export const metadata: Metadata = { alternates:{canonical:'/'}, openGraph:{title:'Psicologo e Psicoterapeuta a Catania | Francesco Corsaro',description:'Comprendere il proprio funzionamento per costruire nuove possibilità di cambiamento.'} };
+export const metadata = pageMetadata({
+  title: 'Psicologo e Psicoterapeuta a Catania',
+  description: 'Psicoterapia a Catania per adolescenti, giovani adulti e genitori. Ansia, ADHD, autismo, regolazione emotiva e parent training.',
+  path: '/'
+});
 
 export default function Home() {
   return <>
