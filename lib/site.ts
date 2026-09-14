@@ -20,7 +20,7 @@ export const site = {
     : true,
   sessionDuration: 50,
   photo: '/a0045d7b-d706-4c43-9065-156ba743ea10.jpg',
-  logo: '/logo-francesco-corsaro.png',
+  logo: '/logo-francesco-corsaro.svg',
 };
 
 const isProductionDeployment = !process.env.VERCEL_ENV || process.env.VERCEL_ENV === 'production';
