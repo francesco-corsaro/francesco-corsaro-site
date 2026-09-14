@@ -2,7 +2,8 @@ export const site = {
   name: 'Francesco Corsaro',
   role: 'Psicologo | Psicoterapeuta',
   city: 'Catania',
-  url: process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+  // The public identity always uses the definitive domain, including preview metadata.
+  url: 'https://francescocorsaro.it',
   email: process.env.NEXT_PUBLIC_CONTACT_EMAIL || 'corsaro.francesco.psi@gmail.com',
   phone: process.env.NEXT_PUBLIC_PHONE || '+39 348 568 6702',
   phoneHref: 'tel:+393485686702',
@@ -19,7 +20,7 @@ export const site = {
     : true,
   sessionDuration: 50,
   photo: '/a0045d7b-d706-4c43-9065-156ba743ea10.jpg',
-  logo: '/logo-francesco-corsaro.png',
+  logo: '/logo-francesco-corsaro.svg',
 };
 
 const isProductionDeployment = !process.env.VERCEL_ENV || process.env.VERCEL_ENV === 'production';

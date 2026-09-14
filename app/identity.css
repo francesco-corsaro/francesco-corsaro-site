@@ -13,6 +13,9 @@
   display: grid;
   place-items: center;
   flex: 0 0 auto;
+  padding: 3px;
+  border-radius: 10px;
+  background: var(--paper);
 }
 
 .brand-logo {
@@ -87,4 +90,15 @@
   .footer-logo { width: 56px; height: 56px; }
   .portrait-card { min-height: 390px; border-radius: 26px 26px 78px 26px; }
   .about-photo { min-height: 380px; border-radius: 88px 24px 24px 24px; }
+}
+
+/* Keep the professional subtitle legible against the dark footer. */
+.footer .brand small {
+  color: #b9c8c4;
+}
+
+/* Text fields are full width; the consent checkbox must keep its native size. */
+.contact-form .check input {
+  width: auto;
+  flex: 0 0 auto;
 }
