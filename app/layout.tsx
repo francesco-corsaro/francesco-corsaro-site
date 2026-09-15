@@ -57,8 +57,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     '@type': 'PostalAddress',
     streetAddress: site.streetAddress,
     postalCode: site.postalCode,
-    addressLocality: 'Catania',
-    addressRegion: 'Sicilia',
+    addressLocality: site.addressLocality,
+    addressRegion: site.addressRegion,
     addressCountry: 'IT'
   };
 
@@ -68,7 +68,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       {
         '@type': 'WebSite',
         '@id': `${site.url}/#website`,
-        url: site.url,
+        url: site.publicUrl,
         name: 'Francesco Corsaro · Psicologo Psicoterapeuta',
         description: defaultDescription,
         inLanguage: 'it-IT',
@@ -96,11 +96,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         knowsAbout: ['Psicoterapia Cognitiva Complessa', 'Ansia', 'ADHD', 'Autismo', 'Adolescenza', 'Parent training']
       },
       {
-        '@type': 'ProfessionalService',
+        '@type': 'MedicalBusiness',
         '@id': `${site.url}/#practice`,
-        name: `${site.name} - Psicologo e Psicoterapeuta`,
+        name: site.name,
         description: defaultDescription,
-        url: site.url,
+        url: site.publicUrl,
         logo: `${site.url}${site.logo}`,
         image: `${site.url}${site.photo}`,
         telephone: site.phone,
