@@ -195,7 +195,7 @@ details p { max-width:760px; color:var(--muted); margin:16px 0 2px; }
   .situations,.card-grid { grid-template-columns:1fr; }.situation:last-child { grid-column:auto; }.situation { min-height:160px; padding:26px; }
   .situation p { font-size:1.25rem; }
   .area-card { min-height:260px; }
-  .mind-shell { padding:18px; border-radius:22px; }.mind-map { min-height:330px; }.mind-node { font-size:.72rem; padding:7px 9px; }.mind-core { width:86px;height:86px; }.mind-core:before{inset:-15px}.mind-core:after{inset:-30px}
+  .mind-shell { padding:18px; border-radius:22px; }.mind-map { width:100%; min-width:0; min-height:330px; aspect-ratio:auto; }.mind-node { font-size:.72rem; padding:7px 9px; }.mind-core { width:86px;height:86px; }.mind-core:before{inset:-15px}.mind-core:after{inset:-30px}
   .abstract-panel { min-height:300px; }.about-grid { gap:34px; }
   .page-hero { padding:84px 0 56px; }.page-hero h1 { font-size:clamp(2.7rem,13vw,4rem); }
   .prose h2 { margin-top:48px; }.prose p { font-size:1rem; }
