@@ -29,16 +29,17 @@ export default function Home() {
     </section>
 
     <section className="section alt" id="posso-aiutarti">
-      <div className="container narrow"><span className="eyebrow">Posso aiutarti se…</span><h2>Riconoscere ciò che sta succedendo senza trasformarlo subito in un’etichetta.</h2></div>
-      <div className="container situations">
+      <div className="container"><span className="eyebrow">Da dove partire</span><h2 id="situations-title">Posso aiutarti se…</h2></div>
+      <ul className="container situations" aria-labelledby="situations-title" role="list">
         {[
-          'L’ansia occupa troppo spazio nelle tue giornate.',
-          'Ti capita di capire razionalmente cosa dovresti fare ma di non riuscire comunque a farlo.',
-          'Con l’ADHD organizzazione, procrastinazione o regolazione emotiva stanno diventando difficili da gestire.',
-          'Sei un genitore e alcuni comportamenti di tuo figlio stanno diventando difficili da comprendere.',
-          'Stai attraversando un periodo nel quale non riesci più a riconoscere chiaramente ciò che provi o ciò di cui hai bisogno.'
-        ].map((s,i)=><article className="situation" key={s}><span>0{i+1}</span><p>{s}</p></article>)}
-      </div>
+          'l’ansia occupa troppo spazio nelle tue giornate.',
+          'ti capita di capire razionalmente cosa dovresti fare ma di non riuscire comunque a farlo.',
+          'con l’ADHD organizzazione, procrastinazione o regolazione emotiva stanno diventando difficili da gestire.',
+          'sei un genitore e alcuni comportamenti di tuo figlio stanno diventando difficili da comprendere.',
+          'stai attraversando un periodo nel quale non riesci più a riconoscere chiaramente ciò che provi o ciò di cui hai bisogno.'
+        ].map(s => <li className="situation" key={s}><p>{s}</p></li>)}
+      </ul>
+      <div className="container situations-note"><p>Possiamo partire da ciò che stai vivendo, per comprenderlo insieme e individuare come affrontarlo.</p></div>
     </section>
 
     <section className="section">
