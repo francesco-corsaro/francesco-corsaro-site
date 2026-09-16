@@ -65,11 +65,11 @@ export default function Home() {
     <section className="section alt">
       <div className="container narrow centered"><span className="eyebrow">Come funziona</span><h2>Un percorso costruito insieme, non un protocollo identico per tutti.</h2></div>
       <div className="container steps">
-        <article><span>01</span><h3>Primo colloquio</h3><p>Comprendere il motivo della richiesta e cosa sta accadendo in questo momento della vita.</p></article>
-        <article><span>02</span><h3>Comprendere il funzionamento</h3><p>Ricostruire insieme processi emotivi, cognitivi, comportamentali, relazionali e contestuali coinvolti nella difficoltà.</p></article>
-        <article><span>03</span><h3>Costruire il cambiamento</h3><p>Definire obiettivi e strategie terapeutiche personalizzate e verificarne progressivamente l’efficacia.</p></article>
+        <article><span className="step-label">Incontrarci</span><h3>Primo colloquio</h3><p>Comprendere il motivo della richiesta e cosa sta accadendo in questo momento della vita.</p></article>
+        <article><span className="step-label">Comprendere</span><h3>Comprendere il funzionamento</h3><p>Ricostruire insieme processi emotivi, cognitivi, comportamentali, relazionali e contestuali coinvolti nella difficoltà.</p></article>
+        <article><span className="step-label">Lavorare insieme</span><h3>Costruire il cambiamento</h3><p>Definire obiettivi e strategie terapeutiche personalizzate e verificarne progressivamente l’efficacia.</p></article>
       </div>
-      <div className="container narrow centered"><p className="muted">Tempi e modalità del percorso dipendono dalla persona, dalla richiesta e dal problema presentato.</p></div>
+      <div className="container narrow centered steps-note"><p className="muted">Tempi e modalità del percorso dipendono dalla persona, dalla richiesta e dal problema presentato.</p></div>
     </section>
 
     <section className="section cta-section"><div className="container cta-box"><span className="eyebrow">Primo passo</span><h2>Possiamo partire da ciò che sta succedendo adesso.</h2><p>Il primo colloquio serve a comprendere la situazione, chiarire la richiesta e valutare insieme come procedere.</p><Link className="btn" href="/contatti">Contattami</Link></div></section>
