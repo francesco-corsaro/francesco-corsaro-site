@@ -41,7 +41,7 @@ export function ContactForm() {
   }
 
   return (
-    <form className="contact-form" onSubmit={submit}>
+    <form id="modulo-contatto" className="contact-form" onSubmit={submit}>
       <label>Nome<input name="name" autoComplete="name" maxLength={100} required /></label>
       <label>Email o telefono<input name="contact" autoComplete="email" maxLength={160} required /></label>
       <label>Messaggio<textarea name="message" rows={6} maxLength={2000} required aria-describedby="message-help" /></label>

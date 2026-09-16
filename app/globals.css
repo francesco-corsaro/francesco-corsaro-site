@@ -168,7 +168,6 @@ details p { max-width:760px; color:var(--muted); margin:16px 0 2px; }
 .footer p,.footer a { font-size:.84rem; color:#b9c8c4; }
 .footer a:hover { color:#fff; }
 .footer-bottom { border-top:1px solid rgba(255,255,255,.1); margin-top:48px; padding-top:20px; }
-.mobile-cta { display:none; }
 .cookie { position:fixed; z-index:150; left:20px; right:20px; bottom:20px; max-width:960px; margin:auto; display:flex; gap:30px; align-items:center; justify-content:space-between; padding:18px 20px; background:#fffdf8; border:1px solid var(--line); border-radius:18px; box-shadow:var(--shadow); }
 .cookie p { font-size:.8rem; color:var(--muted); margin:.2rem 0 0; }.cookie-actions { display:flex; gap:8px; flex:none; }.cookie .btn { min-height:42px; font-size:.8rem; padding:8px 14px; }
 @media (prefers-reduced-motion: reduce) { *,*::before,*::after { scroll-behavior:auto !important; transition:none !important; animation:none !important; } }
@@ -188,7 +187,7 @@ details p { max-width:760px; color:var(--muted); margin:16px 0 2px; }
   .footer-grid { grid-template-columns:1fr 1fr; }
 }
 @media (max-width: 640px) {
-  body { padding-bottom:70px; }
+
   .container,.narrow { width:min(calc(100% - 28px), var(--max)); }
   .header-inner { height:68px; }.brand small { display:none; }.brand-mark { width:34px;height:34px; }
   h1 { font-size:clamp(2.75rem,15vw,4.5rem); }.lead { font-size:1.08rem; }
@@ -203,6 +202,15 @@ details p { max-width:760px; color:var(--muted); margin:16px 0 2px; }
   .prose h2 { margin-top:48px; }.prose p { font-size:1rem; }
   .contact-data p { grid-template-columns:1fr; gap:3px; }
   .footer-grid { grid-template-columns:1fr; }.footer { padding-bottom:46px; }
-  .mobile-cta { display:flex; position:fixed; z-index:120; left:12px; right:12px; bottom:10px; min-height:50px; align-items:center; justify-content:center; border-radius:999px; background:var(--ink); color:#fff; box-shadow:0 8px 32px rgba(0,0,0,.22); font-weight:750; }
   .cookie { bottom:72px; left:10px; right:10px; display:grid; gap:12px; }.cookie-actions { display:grid; grid-template-columns:1fr 1fr; }.cookie .btn { width:100%; }
 }
+
+/* Compact contact disclosure, anchored to the right on every screen size. */
+.contact-widget { position:fixed; z-index:120; right:max(16px, env(safe-area-inset-right)); bottom:calc(16px + env(safe-area-inset-bottom)); }
+.contact-trigger { display:flex; align-items:center; gap:8px; min-height:48px; padding:10px 16px; border:1px solid rgba(255,255,255,.3); border-radius:999px; background:var(--ink); color:#fff; box-shadow:0 4px 18px rgba(0,0,0,.18); font-size:.9rem; font-weight:650; cursor:pointer; }
+.contact-trigger:hover { background:var(--ink-2); }
+.contact-options { position:absolute; right:0; bottom:calc(100% + 12px); width:280px; max-width:calc(100vw - 32px); padding:16px; border:1px solid var(--line); border-radius:18px; background:var(--paper); color:var(--ink); box-shadow:var(--shadow); }
+.contact-options p { margin:0 0 10px; font-size:.9rem; font-weight:650; }
+.contact-options a { display:flex; align-items:center; justify-content:space-between; gap:8px; min-height:48px; padding:10px 12px; border-radius:10px; font-size:1rem; }
+.contact-options a:hover,.contact-options a:focus-visible { background:var(--sage-soft); }
+#modulo-contatto { scroll-margin-top:100px; }

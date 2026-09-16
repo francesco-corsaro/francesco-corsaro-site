@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { ContactWidget } from '@/components/ContactWidget';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 import { JsonLd } from '@/components/SeoJsonLd';
@@ -126,7 +127,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main id="contenuto">{children}</main>
         <Footer />
-        <a className="mobile-cta" href="/contatti">Richiedi un colloquio</a>
+        <ContactWidget />
         <JsonLd data={jsonLd} />
       </body>
     </html>
