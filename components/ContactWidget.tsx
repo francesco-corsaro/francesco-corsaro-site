@@ -1,25 +1,25 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useRef, useState } from 'react';
 import { site } from '@/lib/site';
 
 export function ContactWidget() {
+  const pathname = usePathname();
+  const [formVisible, setFormVisible] = useState(false);
   const [open, setOpen] = useState(false);
   const root = useRef<HTMLDivElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
     if (!open) return;
-    function dismiss(event: PointerEvent) {
+    const dismiss = (event: PointerEvent) => {
       if (!root.current?.contains(event.target as Node)) setOpen(false);
-    }
-    function escape(event: KeyboardEvent) {
-      if (event.key === 'Escape') {
-        setOpen(false);
-        trigger.current?.focus();
-      }
-    }
+    };
+    const escape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') { setOpen(false); trigger.current?.focus(); }
+    };
     document.addEventListener('pointerdown', dismiss);
     document.addEventListener('keydown', escape);
     return () => {
@@ -28,8 +28,16 @@ export function ContactWidget() {
     };
   }, [open]);
 
+  useEffect(() => {
+    const form = document.getElementById('modulo-contatto');
+    if (!form) return;
+    const observer = new IntersectionObserver(([entry]) => setFormVisible(entry.isIntersecting), { rootMargin: '-90px 0px 0px 0px' });
+    observer.observe(form);
+    return () => observer.disconnect();
+  }, [pathname]);
+
   return (
-    <div className="contact-widget" ref={root} onBlur={(event) => {
+    <div hidden={pathname === '/contatti' && formVisible && !open} className="contact-widget" ref={root} onBlur={(event) => {
       if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false);
     }}>
       <button className="contact-trigger" ref={trigger} type="button"

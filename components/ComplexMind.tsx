@@ -4,11 +4,11 @@ import { useState } from 'react';
 
 const nodes = [
   { id: 'emozioni', label: 'Emozioni', x: 50, y: 16 },
-  { id: 'pensieri', label: 'Pensieri', x: 82, y: 35 },
+  { id: 'pensieri', label: 'Pensieri', x: 76, y: 35 },
   { id: 'corpo', label: 'Corpo', x: 74, y: 76 },
   { id: 'comportamenti', label: 'Comportamenti', x: 50, y: 90 },
-  { id: 'relazioni', label: 'Relazioni', x: 18, y: 68 },
-  { id: 'esperienze', label: 'Esperienze', x: 19, y: 30 },
+  { id: 'relazioni', label: 'Relazioni', x: 24, y: 68 },
+  { id: 'esperienze', label: 'Esperienze', x: 24, y: 30 },
 ];
 
 const descriptions: Record<string,string> = {
@@ -25,7 +25,7 @@ export function ComplexMind() {
   return (
     <div className="mind-shell">
       <div className="mind-map" aria-label="Mappa interattiva dei processi psicologici">
-        <svg className="mind-lines" viewBox="0 0 100 100" role="img" aria-label="Connessioni tra emozioni, pensieri, corpo, comportamenti, relazioni ed esperienze">
+        <svg className="mind-lines" viewBox="0 0 100 100" preserveAspectRatio="none" role="img" aria-label="Connessioni tra emozioni, pensieri, corpo, comportamenti, relazioni ed esperienze">
           {nodes.flatMap((a,i) => nodes.slice(i+1).map((b) => (
             <line key={`${a.id}-${b.id}`} x1={a.x} y1={a.y} x2={b.x} y2={b.y} className={active===a.id || active===b.id ? 'active' : ''} />
           )))}

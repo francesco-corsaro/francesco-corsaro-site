@@ -2,6 +2,8 @@
 
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
+import { contactType } from '@/lib/contact-validation';
+import { site } from '@/lib/site';
 
 export function ContactForm() {
   const [status, setStatus] = useState('');
@@ -12,6 +14,12 @@ export function ContactForm() {
     e.preventDefault();
     const formElement = e.currentTarget;
     const form = new FormData(formElement);
+    const contactInput = formElement.elements.namedItem('contact') as HTMLInputElement;
+    if (!contactType(contactInput.value.trim())) {
+      contactInput.setCustomValidity('Inserisci un’email valida oppure un numero di telefono completo.');
+      contactInput.reportValidity();
+      return;
+    }
     setSending(true);
     setStatus('');
 
@@ -19,6 +27,7 @@ export function ContactForm() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
+        signal: AbortSignal.timeout(18_000),
         body: JSON.stringify({
           name: String(form.get('name') || ''),
           contact: String(form.get('contact') || ''),
@@ -34,7 +43,7 @@ export function ContactForm() {
       formElement.reset();
       setStartedAt(Date.now());
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : 'Non è stato possibile inviare il messaggio. Puoi contattarmi telefonicamente o via WhatsApp.');
+      setStatus(error instanceof Error && error.name !== 'TimeoutError' && error.name !== 'TypeError' ? error.message : 'Non è stato possibile confermare l’invio. Il messaggio rimane nel modulo. Puoi contattarmi ai recapiti qui sotto.');
     } finally {
       setSending(false);
     }
@@ -43,13 +52,14 @@ export function ContactForm() {
   return (
     <form id="modulo-contatto" className="contact-form" onSubmit={submit}>
       <label>Nome<input name="name" autoComplete="name" maxLength={100} required /></label>
-      <label>Email o telefono<input name="contact" autoComplete="email" maxLength={160} required /></label>
-      <label>Messaggio<textarea name="message" rows={6} maxLength={2000} required aria-describedby="message-help" /></label>
+      <label>Email o telefono<input name="contact" autoComplete="email" onInput={(event) => event.currentTarget.setCustomValidity('')} aria-describedby="contact-help" maxLength={160} required /></label>
+      <p id="contact-help" className="form-help">Indica il recapito al quale desideri essere ricontattato.</p>
+      <label>Messaggio<textarea name="message" rows={6} minLength={3} maxLength={2000} required aria-describedby="message-help" /></label>
       <p id="message-help" className="form-help">Per tutelare la tua privacy, nel primo messaggio evita di inserire diagnosi, referti o dettagli clinici non necessari. È sufficiente indicare brevemente il motivo del contatto.</p>
       <label className="hp-field" aria-hidden="true">Sito web<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <label className="check"><input type="checkbox" name="privacy" required /> <span>Ho letto l’<Link href="/privacy">informativa privacy</Link> e chiedo di essere ricontattato/a in merito alla mia richiesta.</span></label>
       <button className="btn" type="submit" disabled={sending}>{sending ? 'Invio in corso…' : 'Richiedi un primo colloquio'}</button>
-      {status && <p className="form-status" role="status" aria-live="polite">{status}</p>}
+      {status && <div className="form-status" role="status" aria-live="polite"><p>{status}</p><a href={site.phoneHref}>Chiama</a> · <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a></div>}
     </form>
   );
 }

@@ -2,14 +2,25 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { usePathname } from 'next/navigation';
 import { nav, site } from '@/lib/site';
 
 export function Header() {
+  const pathname = usePathname();
+  const header = useRef<HTMLElement>(null);
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => {
+    if (!open) return;
+    const outside = (event: PointerEvent) => {
+      if (!header.current?.contains(event.target as Node)) setOpen(false);
+    };
+    document.addEventListener('pointerdown', outside);
+    return () => document.removeEventListener('pointerdown', outside);
+  }, [open]);
   return (
-    <header className="site-header" onKeyDown={(event) => {
+    <header ref={header} className="site-header" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setOpen(false); }} onKeyDown={(event) => {
       if (event.key === 'Escape' && open) {
         setOpen(false);
         menuButton.current?.focus();
@@ -27,7 +38,7 @@ export function Header() {
           <span aria-hidden="true">{open ? 'Chiudi' : 'Menu'}</span>
         </button>
         <nav id="main-nav" className={open ? 'nav open' : 'nav'} aria-label="Navigazione principale">
-          {nav.map((item) => <Link key={item.href} href={item.href} onClick={() => setOpen(false)}>{item.label}</Link>)}
+          {nav.map((item) => <Link key={item.href} href={item.href} aria-current={pathname === item.href ? 'page' : undefined} onClick={() => setOpen(false)}>{item.label}</Link>)}
           <Link className="btn btn-small" href="/contatti" onClick={() => setOpen(false)}>Richiedi un colloquio</Link>
         </nav>
       </div>

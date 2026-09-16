@@ -15,16 +15,13 @@ export function Footer() {
           <p className="muted">Comprendere il proprio funzionamento per costruire nuove possibilità di cambiamento.</p>
         </div>
         <div><h2 className="footer-heading">Navigazione</h2>{nav.map(n => <Link key={n.href} href={n.href}>{n.label}</Link>)}</div>
-        <div><h2 className="footer-heading">Aree</h2>{areas.slice(0,4).map(a => <Link key={a.href} href={a.href}>{a.title}</Link>)}</div>
+        <div><h2 className="footer-heading">Aree</h2>{areas.map(a => <Link key={a.href} href={a.href}>{a.title}</Link>)}</div>
         <div>
           <h2 className="footer-heading">Dati professionali</h2>
           <p>{site.name}</p>
           <p>Ordine degli Psicologi della Regione Siciliana: n. {site.orderNumber}</p>
           {hasVat && <p>Partita IVA: {site.vat}</p>}
-          <p>Indirizzo: {site.streetAddress}</p>
-          <p>Città: {site.addressLocality}</p>
-          <p>Provincia: {site.addressRegion}</p>
-          <p>CAP: {site.postalCode}</p>
+          <address>{site.streetAddress}<br />{site.postalCode} {site.addressLocality} ({site.addressRegion})</address>
           <p>Telefono: <a href={site.phoneHref}>{site.phone}</a></p>
           <p>Sito: <a href={site.publicUrl}>{site.publicUrl}</a></p>
           <p>Email: <a href={`mailto:${site.email}`}>{site.email}</a></p>
