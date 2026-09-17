@@ -9,10 +9,10 @@ export const metadata: Metadata = {
 
 export default function Page(){
   return <><section className="page-hero"><div className="container narrow"><span className="eyebrow">Privacy</span><h1>Privacy Policy</h1><p className="lead">Informazioni sul trattamento dei dati personali effettuato attraverso questo sito.</p></div></section><section className="section"><div className="container prose legal-copy">
-    <p><strong>Ultimo aggiornamento:</strong> 11 settembre 2026.</p>
+    <p><strong>Ultimo aggiornamento:</strong> 17 settembre 2026.</p>
     <h2>Titolare del trattamento</h2>
     <p>Il titolare del trattamento è <strong>Francesco Corsaro</strong>, Psicologo e Psicoterapeuta, iscritto all’Ordine degli Psicologi della Regione Siciliana n. {site.orderNumber}.</p>
-    <p>Recapiti: telefono <a href={site.phoneHref}>{site.phone}</a>; email <a href={`mailto:${site.email}`}>{site.email}</a>; studio {site.address}. La Partita IVA sarà indicata prima della pubblicazione definitiva del sito.</p>
+    <p>Recapiti: telefono <a href={site.phoneHref}>{site.phone}</a>; email <a href={`mailto:${site.email}`}>{site.email}</a>; studio {site.address}. {!site.vat.startsWith('[') && <>Partita IVA: {site.vat}.</>}</p>
 
     <h2>Dati trattati attraverso il modulo di contatto</h2>
     <p>Se utilizzi il modulo di contatto vengono trattati il nome, il recapito che scegli di indicare e il contenuto del messaggio. Questi dati sono utilizzati esclusivamente per leggere la richiesta, ricontattarti e valutare l’eventuale avvio di un colloquio o di un rapporto professionale.</p>
@@ -28,6 +28,7 @@ export default function Page(){
     <p>Vercel può effettuare trattamenti e trasferimenti internazionali connessi all’erogazione dell’infrastruttura. Le condizioni e le garanzie applicabili dipendono dal piano e dagli accordi attivi con il fornitore e devono essere mantenute coerenti con la configurazione effettivamente utilizzata al momento della pubblicazione.</p>
 
     <h2>Dati tecnici di navigazione</h2>
+    <p>Per prevenire abusi vengono utilizzati contatori temporanei associati a una chiave tecnica derivata dall’indirizzo di rete. I registri applicativi del modulo riportano identificativi casuali, esiti e codici tecnici, senza nome, recapito o testo del messaggio.</p>
     <p>I sistemi informatici e i servizi di hosting possono trattare dati tecnici necessari al funzionamento e alla sicurezza del sito, come indirizzo IP, data e ora della richiesta, tipo di browser e informazioni diagnostiche. Il sito non utilizza, allo stato attuale, Google Analytics, Meta Pixel o altri strumenti di profilazione pubblicitaria.</p>
 
     <h2>WhatsApp e servizi esterni</h2>

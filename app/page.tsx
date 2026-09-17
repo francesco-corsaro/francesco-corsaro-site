@@ -22,7 +22,7 @@ export default function Home() {
           <p className="microcopy">Puoi chiedere un primo colloquio anche senza una diagnosi.</p>
         </div>
         <figure className="portrait-card">
-          <Image src={site.photo} alt="Francesco Corsaro, psicologo e psicoterapeuta a Catania" fill priority sizes="(max-width: 900px) 100vw, 38vw" className="portrait-image" />
+          <Image src={site.photo} alt="Francesco Corsaro, psicologo e psicoterapeuta a Catania" fill priority sizes="(max-width: 960px) 100vw, 38vw" className="portrait-image" />
         </figure>
       </div>
     </section>
@@ -52,7 +52,7 @@ export default function Home() {
     </section>
 
     <section className="section">
-      <div className="container about-grid"><figure className="about-photo"><Image src={site.photo} alt="Francesco Corsaro" fill sizes="(max-width: 900px) 100vw, 42vw" className="portrait-image" /></figure><div>
+      <div className="container about-grid"><figure className="about-photo"><Image src={site.photo} alt="Francesco Corsaro" fill sizes="(max-width: 960px) 100vw, 42vw" className="portrait-image" /></figure><div>
         <span className="eyebrow">Chi sono</span><h2>Lavoro cercando di capire prima di spiegare.</h2>
         <p>Sono Francesco Corsaro, psicologo e psicoterapeuta formato presso la Scuola ALETEIA. Ho maturato esperienza con adolescenti, persone con disturbi del neurosviluppo e famiglie, anche in contesti educativi.</p>
         <Link className="text-link" href="/chi-sono">Conosci meglio il mio percorso <span aria-hidden="true">→</span></Link>

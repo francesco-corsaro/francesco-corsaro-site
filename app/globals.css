@@ -53,6 +53,7 @@ p { margin:0 0 1.2rem; }
 .btn-small { min-height:40px; padding:9px 15px; font-size:.9rem; }
 .btn-ghost { background:transparent; color:var(--ink); }
 .btn-ghost:hover { color:white; }
+.btn-light:hover { color:#fff; }
 .btn-light { background:#f7f2e9; color:var(--ink); border-color:#f7f2e9; }
 .actions { display:flex; flex-wrap:wrap; gap:12px; margin:32px 0 20px; }
 .text-link { font-weight:750; border-bottom:1px solid var(--ink); padding-bottom:3px; }
@@ -244,3 +245,5 @@ details p { max-width:760px; color:var(--muted); margin:16px 0 2px; }
 
 .faq-list > section + section { margin-top:48px; }
 .faq-list > section > h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:24px; }
+
+.contact-form input:not([type="checkbox"]), .contact-form textarea { font-size:1rem; }

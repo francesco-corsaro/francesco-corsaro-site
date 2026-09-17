@@ -80,7 +80,7 @@
   text-underline-offset: 3px;
 }
 
-@media (max-width: 900px) {
+@media (max-width: 960px) {
   .portrait-card { min-height: 480px; }
   .about-photo { min-height: 430px; border-radius: 110px 28px 28px 28px; }
 }
