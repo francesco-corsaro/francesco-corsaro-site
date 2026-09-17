@@ -1,7 +1,6 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { AreaCard } from '@/components/AreaCard';
-import { ComplexMind } from '@/components/ComplexMind';
 import { areas, site } from '@/lib/site';
 import { pageMetadata } from '@/lib/seo';
 
@@ -18,9 +17,9 @@ export default function Home() {
         <div className="hero-copy">
           <span className="eyebrow">Francesco Corsaro · Psicologo e Psicoterapeuta · Catania</span>
           <h1>Capire come funzioniamo per poter cambiare.</h1>
-          <p className="lead">Psicoterapia per adolescenti, giovani adulti e genitori a Catania. Un percorso per comprendere emozioni, pensieri, comportamenti e relazioni senza ridurre la persona a un sintomo o a una diagnosi.</p>
+          <p className="lead">Aiuto adolescenti, giovani adulti e genitori ad affrontare ansia, difficoltà emotive e relazionali, ADHD e autismo. Ricevo a Catania e, quando appropriato, online.</p>
           <div className="actions"><Link className="btn" href="/contatti">Richiedi un primo colloquio</Link><Link className="btn btn-ghost" href="/come-lavoro">Scopri il mio approccio</Link></div>
-          <p className="microcopy">Capire cosa mantiene una difficoltà è spesso il primo passo per poter intervenire su di essa.</p>
+          <p className="microcopy">Puoi chiedere un primo colloquio anche senza una diagnosi.</p>
         </div>
         <figure className="portrait-card">
           <Image src={site.photo} alt="Francesco Corsaro, psicologo e psicoterapeuta a Catania" fill priority sizes="(max-width: 900px) 100vw, 38vw" className="portrait-image" />
@@ -43,31 +42,29 @@ export default function Home() {
     </section>
 
     <section className="section">
-      <div className="container section-head"><div><span className="eyebrow">Aree di intervento</span><h2>Problemi diversi richiedono domande diverse.</h2></div><p>Due persone possono provare la stessa ansia per motivi molto diversi. Per questo il lavoro terapeutico parte dalla comprensione del funzionamento della singola persona.</p></div>
+      <div className="container section-head"><div><span className="eyebrow">Aree di intervento</span><h2>Da ciò che vivi al percorso più adatto.</h2></div><p>Esplora le situazioni di cui mi occupo. Se ti riconosci in più di un’area, possiamo chiarire insieme da dove partire.</p></div>
       <div className="container card-grid">{areas.map(a=><AreaCard key={a.href} {...a}/>)}</div>
     </section>
 
     <section className="section dark">
-      <div className="container intro-light"><span className="eyebrow">Il mio approccio</span><h2>Una persona è più complessa del sintomo che porta in terapia.</h2><p>La difficoltà psicologica emerge spesso dall’interazione tra più processi. Per comprenderla è utile osservare non solo cosa pensiamo, ma anche cosa prova il corpo, quali emozioni si attivano, come ci comportiamo, quali relazioni viviamo e quali esperienze hanno contribuito a costruire il nostro modo di stare nel mondo.</p></div>
-      <div className="container"><ComplexMind/></div>
-      <div className="container centered"><Link className="btn btn-light" href="/come-lavoro">Approfondisci la Psicoterapia Cognitiva Complessa</Link></div>
+      <div className="container intro-light"><span className="eyebrow">Il mio approccio</span><h2>Come lavoriamo insieme.</h2><p>Partiamo da situazioni concrete e osserviamo come si collegano pensieri, emozioni, corpo e relazioni. Il mio orientamento è la Psicoterapia Cognitiva Complessa: questa lettura guida la scelta degli obiettivi e delle strategie da costruire insieme.</p></div>
+      <div className="container centered"><Link className="btn btn-light" href="/come-lavoro">Scopri come lavoro</Link></div>
     </section>
 
     <section className="section">
       <div className="container about-grid"><figure className="about-photo"><Image src={site.photo} alt="Francesco Corsaro" fill sizes="(max-width: 900px) 100vw, 42vw" className="portrait-image" /></figure><div>
         <span className="eyebrow">Chi sono</span><h2>Lavoro cercando di capire prima di spiegare.</h2>
-        <p>Nel mio modo di lavorare, la diagnosi può essere utile per orientarsi, ma non esaurisce la comprensione della persona. Cerco di ricostruire insieme al paziente come una difficoltà si inserisce nella sua storia, nelle relazioni, nelle abitudini quotidiane e nei meccanismi con cui prova a regolare emozioni e stress.</p>
-        <p>Sono laureato in Psicologia Clinica, psicologo e psicoterapeuta. Ho completato una formazione quadriennale in Psicoterapia Cognitiva Complessa presso ALETEIA e ho maturato esperienza con adolescenti, ADHD, disturbi del neurosviluppo, persone autistiche e famiglie. Mantengo un interesse specifico per neuroscienze, psicofisiologia e processi di autoregolazione.</p>
+        <p>Sono Francesco Corsaro, psicologo e psicoterapeuta formato presso la Scuola ALETEIA. Ho maturato esperienza con adolescenti, persone con disturbi del neurosviluppo e famiglie, anche in contesti educativi.</p>
         <Link className="text-link" href="/chi-sono">Conosci meglio il mio percorso <span aria-hidden="true">→</span></Link>
       </div></div>
     </section>
 
     <section className="section alt">
-      <div className="container narrow centered"><span className="eyebrow">Come funziona</span><h2>Un percorso costruito insieme, non un protocollo identico per tutti.</h2></div>
+      <div className="container narrow centered"><span className="eyebrow">Come funziona</span><h2>Dal primo incontro al lavoro insieme.</h2></div>
       <div className="container steps">
         <article><span className="step-label">Incontrarci</span><h3>Primo colloquio</h3><p>Comprendere il motivo della richiesta e cosa sta accadendo in questo momento della vita.</p></article>
-        <article><span className="step-label">Comprendere</span><h3>Comprendere il funzionamento</h3><p>Ricostruire insieme processi emotivi, cognitivi, comportamentali, relazionali e contestuali coinvolti nella difficoltà.</p></article>
-        <article><span className="step-label">Lavorare insieme</span><h3>Costruire il cambiamento</h3><p>Definire obiettivi e strategie terapeutiche personalizzate e verificarne progressivamente l’efficacia.</p></article>
+        <article><span className="step-label">Comprendere</span><h3>Comprendere il funzionamento</h3><p>Collegare ciò che senti, pensi e fai alle situazioni in cui la difficoltà si presenta.</p></article>
+        <article><span className="step-label">Lavorare insieme</span><h3>Costruire il cambiamento</h3><p>Concordare obiettivi, sperimentare strategie e fare il punto su ciò che cambia.</p></article>
       </div>
       <div className="container narrow centered steps-note"><p className="muted">Tempi e modalità del percorso dipendono dalla persona, dalla richiesta e dal problema presentato.</p></div>
     </section>

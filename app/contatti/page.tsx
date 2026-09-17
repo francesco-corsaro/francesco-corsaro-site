@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ContactForm } from '@/components/ContactForm';
 import { BreadcrumbJsonLd } from '@/components/SeoJsonLd';
 import { pageMetadata } from '@/lib/seo';
@@ -23,6 +24,7 @@ export default function Page() {
           <h2>Scrivimi</h2>
           <p>Ti ricontatterò al recapito indicato per chiarire la richiesta e concordare le modalità del primo colloquio.</p>
           <ContactForm />
+          <div className="note"><strong>Prima di fissare il colloquio</strong><p>Puoi chiedermi informazioni su costo, disponibilità e modalità degli incontri. Per iniziare bastano una breve descrizione della richiesta e un recapito.</p><Link className="text-link" href="/faq">Leggi le risposte alle domande frequenti</Link></div>
         </div>
         <aside aria-label="Studio e recapiti">
           <h2>Lo studio</h2>

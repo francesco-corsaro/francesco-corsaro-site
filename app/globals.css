@@ -241,3 +241,6 @@ details p { max-width:760px; color:var(--muted); margin:16px 0 2px; }
 .form-status a { text-decoration:underline; }
 @media (max-width:960px) { .nav { max-height:calc(100dvh - 100px); overflow-y:auto; } }
 @media (max-width:640px) { .cta-box { padding:28px; }.contact-hero { padding-block:32px; } }
+
+.faq-list > section + section { margin-top:48px; }
+.faq-list > section > h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:24px; }

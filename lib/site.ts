@@ -46,31 +46,31 @@ export const areas = [
   {
     href: '/psicologo-ansia-catania',
     title: 'Ansia e regolazione emotiva',
-    text: 'Comprendere come pensieri, corpo, evitamento e strategie di regolazione mantengono l’ansia nel tempo.'
+    text: 'Quando preoccupazioni, tensione o paura del giudizio limitano studio, relazioni e scelte.'
   },
   {
     href: '/psicologo-adhd-catania',
     title: 'ADHD',
-    text: 'Attenzione, funzioni esecutive, procrastinazione, impulsività e regolazione emotiva nella vita quotidiana.'
+    text: 'Un lavoro su organizzazione, gestione del tempo ed emozioni, per adolescenti e giovani adulti.'
   },
   {
     href: '/psicologo-autismo-catania',
     title: 'Autismo e neurodivergenze',
-    text: 'Un lavoro rispettoso della neurodiversità, orientato alla comprensione del funzionamento e dei contesti di vita.'
+    text: 'Supporto a persone autistiche e famiglie, a partire da comunicazione, bisogni e contesti di vita.'
   },
   {
     href: '/psicologo-adolescenti-catania',
     title: 'Adolescenza',
-    text: 'Difficoltà emotive, relazionali e scolastiche in una fase in cui identità, autonomia e appartenenza cambiano rapidamente.'
+    text: 'Uno spazio per difficoltà emotive, scuola, relazioni e autonomia, con un ruolo dei genitori da chiarire insieme.'
   },
   {
     href: '/psicoterapia-giovani-adulti-catania',
     title: 'Giovani adulti',
-    text: 'Ansia, blocchi, relazioni, cambiamenti e costruzione dell’identità nei passaggi della vita adulta.'
+    text: 'Affrontare scelte di studio e lavoro, relazioni e momenti in cui ci si sente fermi.'
   },
   {
     href: '/parent-training-catania',
     title: 'Supporto ai genitori e parent training',
-    text: 'Comprendere le dinamiche familiari e costruire strategie educative più coerenti, sostenibili ed efficaci.'
+    text: 'Partire dagli episodi quotidiani per costruire strategie educative e comunicative sostenibili in famiglia.'
   }
 ];
