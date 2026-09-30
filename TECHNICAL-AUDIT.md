@@ -1,45 +1,48 @@
-# Analisi tecnica — 30 settembre 2026
+# Audit tecnico — 30 settembre 2026, aggiornamento dopo attivazione Turnstile
 
-## Interventi applicati
+## Esito e modifiche
 
-- Corrette le cinque iniziali minuscole nella sezione «Posso aiutarti se…» della homepage. Verificati testi delle altre pagine e componenti; non trasformate indiscriminatamente parole, indirizzi o termini interni alle frasi.
-- Pannello cookie disponibile in tutto il sito, chiusura persistente per sei mesi e riapertura dal footer. Solo cookie tecnico `fc_cookie_notice=v1`, SameSite=Lax, Secure su HTTPS, percorso `/`. Nessun identificativo individuale né dati del modulo nel cookie. Chiusura e «Accetta solo necessari» hanno il medesimo effetto. Nessun consenso preventivo a tracker futuri.
-- Origin obbligatorio e coerente, rifiuto di richieste cross-site e contenuti non JSON. Limite di 16 KiB applicato durante la lettura del corpo, anche senza Content-Length. Rifiuto dei caratteri di controllo in nome e recapito.
-- Conservati honeypot, verifica campi sul server, timeout verso Resend e limite locale degli invii. Campi del form a 16 px per ridurre lo zoom automatico su iPhone.
-
-## Raccolta dati consigliata e implementata
-
-| Dato/strumento | Scopo | Stato |
+| Area | Riscontro | Intervento / stato |
 | --- | --- | --- |
-| Nome, email **oppure** telefono, breve messaggio | Rispondere a una richiesta | Già presente; evitare diagnosi/referti |
-| Presa visione privacy | Rendere esplicita la richiesta di ricontatto | Separata dal pannello cookie |
-| Cookie tecnico dell’avviso | Ricordare la chiusura per sei mesi | Implementato |
-| IP e metadati tecnici | Erogazione e prevenzione abusi | Hosting; contatori locali con hash e finestra di dieci minuti |
-| Google Analytics, Meta Pixel, remarketing | Statistiche o pubblicità | Non installati; non necessari al primo contatto |
+| Conferma invio | Avviso poco evidente in fondo al form, con CAPTCHA che ripartiva | Il form viene sostituito da un riquadro «Messaggio inviato», con icona, spiegazione del ricontatto e indicazione di non reinviare. Focus e scorrimento automatici. Nuovo messaggio solo su scelta esplicita. |
+| Attesa ed errori | Stato ambiguo e rischio di ripetere il click | Pulsante «Invia il messaggio», indicatore di attesa, campi bloccati durante invio e blocco sincrono dei doppi submit. Errore evidente con focus e testo conservato. Successo solo con HTTP positivo e `ok: true`. |
+| Retry email | Dopo un timeout non è certo se il provider abbia già accettato l’email | Idempotency-Key Resend derivata da ID casuale della richiesta e contenuto normalizzato; stesso tentativo invariato non produce email duplicate nella finestra del provider (24 ore). Modifiche ai contenuti o un nuovo messaggio producono chiavi diverse. Nessun dato personale in chiaro nella chiave. |
+| Antibot | Turnstile attivato; l’utente conferma la ricezione email | Restano token obbligatorio, Siteverify server, hostname esatto, action contact, gestione scadenza e rifiuto in caso di errore. Nessuna chiave segreta nel repository. |
+| Dipendenze | Prima: PostCSS alto e Next.js moderato tramite dipendenza transitiva | Override PostCSS 8.5.28, stessa major, lockfile aggiornato e build compatibile con Next.js 15.5.25. Dopo: npm audit completo restituisce zero vulnerabilità note. |
+| Controlli CI | Nessun blocco per nuove vulnerabilità di produzione | Aggiunto npm audit --omit=dev --audit-level=high nel workflow GitHub. |
+| Header HTTP | Header principali presenti, nessuna CSP | CSP di base: object-src none, base-uri self, frame-ancestors self, form-action self. No-store sulle API. Non è una CSP completa per script/style. |
+| SEO tecnico | 14 pagine HTML pubbliche controllate | Tutte HTTP 200, un H1 e canonical presente. Robots e sitemap HTTP 200. Articoli vuoti e policy mantengono noindex; sitemap limitata alle pagine pertinenti. |
+| Accessibilità | Menu e diagramma già navigabili con tastiera | Nuovi stati form con status/alert e focus; animazione disattivata con prefers-reduced-motion; checkbox nativa e campi 16px conservati. |
+| Cookie | Nessun analytics/pixel | Avviso tecnico con cookie di versione, sei mesi, SameSite=Lax e Secure su HTTPS. Riapertura dal footer. Nessun consenso raccolto per tracker inesistenti. |
 
-Il sito non archivia i messaggi in un database proprio: li inoltra tramite Resend alla casella configurata. Questo non elimina la conservazione presso i fornitori e nella casella email. Non sono stati inventati tempi di cancellazione né modificati i contratti dei fornitori.
+## Verifiche svolte
 
-## Rischi e attività ancora aperte
+- Lint, TypeScript e build di produzione.
+- Nove test automatici: validazione, origine e formato, corpo sovradimensionato, rate limit locale, Turnstile e blocco email, idempotenza, componente React del modulo.
+- Il test del componente usa un DOM simulato e API esterne simulate: controlla doppio submit, attesa, errore con conservazione del messaggio, successo con sostituzione del form e focus, riapertura di un form vuoto.
+- npm audit completo: 0 vulnerabilità note; npm ls conferma PostCSS 8.5.28 effettivamente usato da Next.js.
+- Richieste HTTP alle 14 pagine principali, robots.txt e sitemap.xml.
+- Il proprietario ha confermato la consegna delle email con Turnstile prima di questo aggiornamento. Nessuna email reale inviata dai test automatici.
 
-1. **Antibot**: honeypot e tempo di compilazione sono aggirabili. Integrare Turnstile con validazione server, hostname e action, prima dell’invio email. Sono necessarie chiavi reali Cloudflare e configurazione Vercel; non dichiarare la protezione attiva finché non è collaudata sul dominio.
-2. **Rate limit distribuito**: il limite attuale di cinque tentativi in dieci minuti è per processo, non globale. Su Vercel configurare una regola Firewall per POST `/api/contact`, oppure uno store condiviso. Il numero di tentativi non è una garanzia tra istanze o riavvii.
-3. **Dipendenze**: `npm audit --omit=dev` segnala due pacchetti (PostCSS alto, Next.js moderato per dipendenza transitiva). Next.js installato: 15.5.25. La correzione automatica proposta è un salto di major: richiede una migrazione separata e test di compatibilità. Non eseguito `npm audit fix --force`. L’impatto dipende dall’elaborazione di CSS/source map non attendibili; il modulo non accetta CSS o file.
-4. **Privacy operativa**: verificare P.IVA, tempi concreti di cancellazione delle richieste senza seguito, accordi Vercel/Resend e casella destinataria. Il testo attuale contiene ancora un riferimento alla P.IVA da completare; non è stato inventato il dato.
-5. **Header**: HTTPS/HSTS, nosniff, SAMEORIGIN, Referrer-Policy e Permissions-Policy presenti nella risposta pubblica. CSP completa non presente; richiede collaudo con script Next.js e widget di sicurezza.
+## Interventi ancora aperti
 
-## Verifiche
+| Priorità | Attività | Dipendenza |
+| --- | --- | --- |
+| P1 | Quota globale per POST /api/contact tramite Vercel Firewall o store condiviso | Accesso al progetto Vercel. Il connettore restituisce 403; non è stata configurata una regola. Il limite applicativo resta cinque tentativi in dieci minuti per istanza, non globale. |
+| P1 | Completare Partita IVA e definire tempi concreti di eliminazione richieste senza seguito; verificare accordi dei fornitori | Dati e scelte del titolare. Nessun dato inventato. |
+| P2 | CSP completa con controllo degli script | Progettare nonce/hash compatibili con pagine statiche Next.js e Cloudflare; collaudo in report-only prima del blocco. La CSP di base non elimina da sola il rischio XSS. |
+| P2 | Collaudo su Safari/iPhone e Chrome/Android reali, zoom e lettore schermo | I test DOM non sostituiscono prove su dispositivi reali. |
+| P2 | Misurazione Core Web Vitals sul traffico reale | Search Console/CrUX; nessun punteggio Lighthouse inventato. Le pagine restano prerenderizzate; Contatti circa 111 kB di First Load JS secondo build. |
+| P3 | Piano per rimuovere l’override PostCSS quando Next.js include una versione corretta | Verificare la dipendenza dopo un futuro aggiornamento del framework; non rimuovere l’override alla cieca. |
 
-Lint, TypeScript, sei test automatici e build di produzione completati. Test invio con Resend simulato: nessun messaggio reale inviato. Esaminate le intestazioni pubbliche HTTPS e il codice delle pagine. Nessuna dichiarazione di collaudo su dispositivi iOS/Android reali.
+## Dati raccolti
 
-## Fonti
+Nome, un recapito (email oppure telefono) e breve messaggio per il ricontatto. Non richiedere diagnosi, referti o dettagli clinici. Il sito inoltra tramite Resend senza database proprio; casella email e fornitori conservano comunque dati secondo configurazione e accordi. Turnstile elabora segnali tecnici; il codice applicativo non invia il contenuto del messaggio a Cloudflare. ID del tentativo mantenuto solo in memoria durante la compilazione, senza localStorage.
 
-- https://www.garanteprivacy.it/faq/cookie
+## Fonti tecniche
+
+- https://github.com/postcss/postcss/releases
+- https://resend.com/docs/dashboard/emails/idempotency-keys
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Reference/Headers/Content-Security-Policy
 - https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
-- https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/
-- Report npm audit eseguito sulla versione installata il 30 settembre 2026.
-
-## Integrazione Turnstile preparata nel ramo dedicato
-
-Codice client/server e policy aggiornati; guida in `TURNSTILE-SETUP.md`. La protezione richiede configurazione prima del merge. Test automatici con API simulate coprono token mancante/non valido, replay/scadenza segnalati da Cloudflare, hostname o action errati, timeout, indisponibilità e chiave mancante. Nessuna email parte in caso di verifica rifiutata. Il collaudo di widget reale e invio sul dominio resta da eseguire con chiavi vere.
-
-Il controllo visivo locale non è stato completato: agent-browser non avvia il daemon e il download del browser Playwright non produce un archivio valido nell’ambiente. La build e i test automatici non sostituiscono tale verifica.
+- https://www.garanteprivacy.it/faq/cookie

@@ -1,3 +1,4 @@
+import { contactIdempotencyKey } from '@/lib/contact-idempotency';
 import { verifyTurnstile } from '@/lib/turnstile';
 import { ContactBodyTooLarge, readContactBody } from '@/lib/contact-request';
 import { NextResponse } from 'next/server';
@@ -27,16 +28,21 @@ export async function POST(request: Request) {
     const apiKey = process.env.RESEND_API_KEY;
     const destination = process.env.CONTACT_EMAIL_TO || process.env.NEXT_PUBLIC_CONTACT_EMAIL;
     if (!apiKey || !destination) return reply('Invio momentaneamente non disponibile. Usa uno dei recapiti qui sotto.', 503);
-    const response = await fetch('https://api.resend.com/emails', {
-      method: 'POST',
-      headers: { Authorization: `Bearer ${apiKey}`, 'Content-Type': 'application/json' },
-      body: JSON.stringify({
+    const email = {
         from: process.env.CONTACT_EMAIL_FROM || 'Sito Francesco Corsaro <onboarding@resend.dev>',
         to: [destination],
         ...(contactType(contact) === 'email' ? { reply_to: contact } : {}),
         subject: `Richiesta dal sito - ${name.replace(/[\r\n]/g, ' ')}`,
         text: `Nome: ${name}\nRecapito: ${contact}\n\nMessaggio:\n${message}\n\nOrigine: modulo contatti del sito di Francesco Corsaro`,
-      }),
+      };
+    const response = await fetch('https://api.resend.com/emails', {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${apiKey}`,
+        'Content-Type': 'application/json',
+        'Idempotency-Key': contactIdempotencyKey('requestId' in body ? body.requestId : undefined, email),
+      },
+      body: JSON.stringify(email),
       signal: AbortSignal.timeout(12_000),
       cache: 'no-store',
     });

@@ -1,6 +1,6 @@
 # Attivazione della verifica antispam
 
-Questa modifica richiede due chiavi Cloudflare. Non unire il ramo in produzione prima della configurazione: il modulo rifiuta l’invio senza verifica, mentre telefono, email e WhatsApp restano disponibili. Nessun CAPTCHA può garantire l’assenza assoluta di bot.
+Turnstile è stato attivato il 30 settembre 2026 e il titolare ha confermato la ricezione delle email. I passaggi seguenti documentano la configurazione per ripristini o nuovi ambienti. Sono necessarie entrambe le chiavi: senza verifica il modulo rifiuta l’invio, mentre telefono, email e WhatsApp restano disponibili. Nessun CAPTCHA può garantire l’assenza assoluta di bot.
 
 1. In Cloudflare, aprire **Turnstile → Add widget**, scegliere modalità **Managed** e autorizzare `francescocorsaro.it` e `www.francescocorsaro.it`. Lasciare disattivata **pre-clearance**: non è necessario spostare DNS o hosting.
 2. Copiare la **Site key** e la **Secret key**. Non inserire la Secret key in GitHub, messaggi, variabili NEXT_PUBLIC o codice client.
@@ -17,7 +17,7 @@ Per Preview usare il dominio esatto di una preview autorizzata anche nel widget 
 4. Creare un nuovo deployment della preview: la variabile NEXT_PUBLIC viene incorporata durante la build.
 5. Verificare che il widget compaia solo nella pagina Contatti. Verificare completamento, scadenza, errore e nuovo tentativo; il testo deve rimanere nel modulo in caso di errore. Con widget bloccato o chiavi mancanti non devono partire email. Usare un destinatario di test per collaudare l’invio completo.
 6. Verificare contratti/informative del nuovo fornitore Cloudflare e l’impostazione senza pre-clearance descritta nelle policy del sito.
-7. Unire la PR e verificare il deployment Production sul dominio reale. Non considerare la sola build o i test con mock una prova della configurazione reale.
+7. Pubblicare e verificare il nuovo deployment Production sul dominio reale. Non considerare la sola build o i test con mock una prova della configurazione reale.
 
 ## Controlli implementati
 
