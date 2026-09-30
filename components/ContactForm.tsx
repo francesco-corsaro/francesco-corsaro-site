@@ -1,17 +1,22 @@
 "use client";
 
+import { Turnstile } from '@/components/Turnstile';
 import Link from 'next/link';
 import { FormEvent, useState } from 'react';
 import { contactType } from '@/lib/contact-validation';
 import { site } from '@/lib/site';
 
 export function ContactForm() {
+  const [turnstileToken, setTurnstileToken] = useState('');
+  const [attempt, setAttempt] = useState(0);
   const [status, setStatus] = useState('');
   const [sending, setSending] = useState(false);
   const [startedAt, setStartedAt] = useState(() => Date.now());
 
   async function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
+    if (sending) return;
+    if (!turnstileToken) { setStatus('Completa la verifica di sicurezza prima di inviare.'); return; }
     const formElement = e.currentTarget;
     const form = new FormData(formElement);
     const contactInput = formElement.elements.namedItem('contact') as HTMLInputElement;
@@ -27,7 +32,7 @@ export function ContactForm() {
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        signal: AbortSignal.timeout(18_000),
+        signal: AbortSignal.timeout(22_000),
         body: JSON.stringify({
           name: String(form.get('name') || ''),
           contact: String(form.get('contact') || ''),
@@ -35,6 +40,7 @@ export function ContactForm() {
           website: String(form.get('website') || ''),
           privacy: form.get('privacy') === 'on',
           startedAt,
+          turnstileToken,
         }),
       });
       const data = await response.json();
@@ -46,6 +52,8 @@ export function ContactForm() {
       setStatus(error instanceof Error && error.name !== 'TimeoutError' && error.name !== 'TypeError' ? error.message : 'Non è stato possibile confermare l’invio. Il messaggio rimane nel modulo. Puoi contattarmi ai recapiti qui sotto.');
     } finally {
       setSending(false);
+      setTurnstileToken('');
+      setAttempt(value => value + 1);
     }
   }
 
@@ -58,7 +66,9 @@ export function ContactForm() {
       <p id="message-help" className="form-help">Per tutelare la tua privacy, nel primo messaggio evita di inserire diagnosi, referti o dettagli clinici non necessari. È sufficiente indicare brevemente il motivo del contatto.</p>
       <label className="hp-field" aria-hidden="true">Sito web<input name="website" tabIndex={-1} autoComplete="off" /></label>
       <label className="check"><input type="checkbox" name="privacy" required /> <span>Ho letto l’<Link href="/privacy">informativa privacy</Link> e chiedo di essere ricontattato/a in merito alla mia richiesta.</span></label>
-      <button className="btn" type="submit" disabled={sending}>{sending ? 'Invio in corso…' : 'Richiedi un primo colloquio'}</button>
+      <Turnstile onToken={setTurnstileToken} attempt={attempt} />
+      <p className="form-help">In alternativa: <a href={site.phoneHref}>Chiama</a> · <a href={`mailto:${site.email}`}>Email</a> · <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a></p>
+      <button className="btn" type="submit" disabled={sending || !turnstileToken}>{sending ? 'Invio in corso…' : 'Richiedi un primo colloquio'}</button>
       {status && <div className="form-status" role="status" aria-live="polite"><p>{status}</p><a href={site.phoneHref}>Chiama</a> · <a href={site.whatsappHref} target="_blank" rel="noopener noreferrer">WhatsApp</a></div>}
     </form>
   );

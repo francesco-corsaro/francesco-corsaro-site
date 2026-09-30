@@ -20,7 +20,7 @@ export default function Page(){
     <p>Il sito è ospitato su infrastruttura Vercel. Come avviene normalmente per i servizi web, il fornitore può trattare dati tecnici indispensabili per consegnare le pagine, prevenire abusi e mantenere la sicurezza del servizio.</p>
 
     <h2>Modulo di contatto</h2>
-    <p>Il modulo di contatto non installa cookie di profilazione. È presente una protezione antispam non invasiva basata su un campo nascosto e su controlli lato server. L’inoltro del messaggio è predisposto mediante Resend e non richiede il caricamento di widget esterni nel browser.</p>
+    <p>Il modulo di contatto non installa cookie di profilazione. La protezione antispam utilizza Cloudflare Turnstile nella pagina Contatti, insieme a un campo nascosto e a controlli lato server. Il browser contatta Cloudflare per generare un token di verifica, che il server convalida prima di inoltrare il messaggio tramite Resend. Turnstile tratta segnali tecnici del browser e della connessione per contrastare gli abusi; il codice del sito non invia a Cloudflare nome, recapito o messaggio. Il widget è configurato senza pre-clearance e non richiede un cookie di profilazione. Se la verifica non è disponibile, puoi usare i recapiti alternativi.</p>
 
     <h2>WhatsApp</h2>
     <p>Il sito contiene un semplice collegamento a WhatsApp. Nessun contenuto di WhatsApp viene caricato automaticamente nella pagina: il servizio viene aperto soltanto quando l’utente sceglie di cliccare il collegamento.</p>

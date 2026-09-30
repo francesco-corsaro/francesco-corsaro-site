@@ -37,3 +37,9 @@ Lint, TypeScript, sei test automatici e build di produzione completati. Test inv
 - https://developers.cloudflare.com/turnstile/get-started/server-side-validation/
 - https://developers.cloudflare.com/turnstile/get-started/client-side-rendering/
 - Report npm audit eseguito sulla versione installata il 30 settembre 2026.
+
+## Integrazione Turnstile preparata nel ramo dedicato
+
+Codice client/server e policy aggiornati; guida in `TURNSTILE-SETUP.md`. La protezione richiede configurazione prima del merge. Test automatici con API simulate coprono token mancante/non valido, replay/scadenza segnalati da Cloudflare, hostname o action errati, timeout, indisponibilità e chiave mancante. Nessuna email parte in caso di verifica rifiutata. Il collaudo di widget reale e invio sul dominio resta da eseguire con chiavi vere.
+
+Il controllo visivo locale non è stato completato: agent-browser non avvia il daemon e il download del browser Playwright non produce un archivio valido nell’ambiente. La build e i test automatici non sostituiscono tale verifica.

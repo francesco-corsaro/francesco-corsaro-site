@@ -1,3 +1,4 @@
+import { verifyTurnstile } from '@/lib/turnstile';
 import { ContactBodyTooLarge, readContactBody } from '@/lib/contact-request';
 import { NextResponse } from 'next/server';
 import { contactType, validateContact } from '@/lib/contact-validation';
@@ -19,6 +20,9 @@ export async function POST(request: Request) {
     if (!result.values) return reply(result.error, 400);
     const elapsed = Date.now() - Number('startedAt' in body ? body.startedAt : NaN);
     if (!Number.isFinite(elapsed) || elapsed < 1200) return reply('Attendi qualche secondo prima di inviare il messaggio.', 400);
+    const verification = await verifyTurnstile('turnstileToken' in body ? body.turnstileToken : undefined);
+    if (verification === 'unavailable') return reply('Verifica di sicurezza non disponibile. Riprova più tardi oppure usa telefono, email o WhatsApp.', 503);
+    if (verification !== 'valid') return reply('Verifica di sicurezza non valida o scaduta. Completa nuovamente il controllo.', 400);
     const { name, contact, message } = result.values;
     const apiKey = process.env.RESEND_API_KEY;
     const destination = process.env.CONTACT_EMAIL_TO || process.env.NEXT_PUBLIC_CONTACT_EMAIL;

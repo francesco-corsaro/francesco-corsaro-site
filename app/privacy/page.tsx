@@ -9,7 +9,7 @@ export const metadata: Metadata = {
 
 export default function Page(){
   return <><section className="page-hero"><div className="container narrow"><span className="eyebrow">Privacy</span><h1>Privacy Policy</h1><p className="lead">Informazioni sul trattamento dei dati personali effettuato attraverso questo sito.</p></div></section><section className="section"><div className="container prose legal-copy">
-    <p><strong>Ultimo aggiornamento:</strong> 11 settembre 2026.</p>
+    <p><strong>Ultimo aggiornamento:</strong> 30 settembre 2026.</p>
     <h2>Titolare del trattamento</h2>
     <p>Il titolare del trattamento è <strong>Francesco Corsaro</strong>, Psicologo e Psicoterapeuta, iscritto all’Ordine degli Psicologi della Regione Siciliana n. {site.orderNumber}.</p>
     <p>Recapiti: telefono <a href={site.phoneHref}>{site.phone}</a>; email <a href={`mailto:${site.email}`}>{site.email}</a>; studio {site.address}. La Partita IVA sarà indicata prima della pubblicazione definitiva del sito.</p>
@@ -26,6 +26,10 @@ export default function Page(){
     <p>Per l’infrastruttura del sito viene utilizzato <strong>Vercel</strong>. Per l’inoltro tecnico del modulo viene utilizzato <strong>Resend</strong>. Tali fornitori trattano dati personali e dati tecnici necessari a erogare i rispettivi servizi secondo i propri accordi sul trattamento dei dati e le proprie misure di sicurezza.</p>
     <p>Resend documenta che i log delle richieste API possono contenere il corpo della richiesta utilizzata per l’invio dell’email e che i dati dell’account, inclusi metadati email, log e record API, sono conservati negli Stati Uniti indipendentemente dalla regione scelta per l’invio. Per i trasferimenti di dati soggetti al GDPR, il Data Processing Addendum di Resend incorpora le Clausole Contrattuali Standard approvate dalla Commissione europea e prevede anche il ricorso al Data Privacy Framework quando applicabile.</p>
     <p>Vercel può effettuare trattamenti e trasferimenti internazionali connessi all’erogazione dell’infrastruttura. Le condizioni e le garanzie applicabili dipendono dal piano e dagli accordi attivi con il fornitore e devono essere mantenute coerenti con la configurazione effettivamente utilizzata al momento della pubblicazione.</p>
+
+    <h2>Verifica antispam del modulo</h2>
+    <p>La pagina Contatti utilizza Cloudflare Turnstile per contrastare gli invii automatizzati. Cloudflare tratta dati tecnici della connessione e del browser, incluso l’indirizzo IP, per la verifica di sicurezza. Il server riceve e convalida un token temporaneo prima dell’inoltro email; il codice del sito non trasmette a Cloudflare nome, recapito o messaggio. Questa misura risponde al legittimo interesse a proteggere il sito e i recapiti da abusi. Non viene usata per marketing o profilazione pubblicitaria.</p>
+    <p>Il servizio può comportare trattamenti internazionali secondo le condizioni di Cloudflare. Per dettagli sui trattamenti e sulle garanzie applicabili consulta l’<a href="https://www.cloudflare.com/privacypolicy/" target="_blank" rel="noopener noreferrer">informativa Cloudflare</a> e il <a href="https://www.cloudflare.com/turnstile-privacy-policy/" target="_blank" rel="noopener noreferrer">Turnstile Privacy Addendum</a>. Se preferisci non utilizzare il widget, puoi contattare direttamente il professionista ai recapiti indicati.</p>
 
     <h2>Dati tecnici di navigazione</h2>
     <p>I sistemi informatici e i servizi di hosting possono trattare dati tecnici necessari al funzionamento e alla sicurezza del sito, come indirizzo IP, data e ora della richiesta, tipo di browser e informazioni diagnostiche. Il sito non utilizza, allo stato attuale, Google Analytics, Meta Pixel o altri strumenti di profilazione pubblicitaria.</p>
