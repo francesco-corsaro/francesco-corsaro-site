@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { CookieConsent } from '@/components/CookieConsent';
 import { ContactWidget } from '@/components/ContactWidget';
 import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
@@ -128,6 +129,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main id="contenuto">{children}</main>
         <Footer />
         <ContactWidget />
+        <CookieConsent />
         <JsonLd data={jsonLd} />
       </body>
     </html>

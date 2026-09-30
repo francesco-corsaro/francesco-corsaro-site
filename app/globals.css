@@ -244,3 +244,12 @@ details p { max-width:760px; color:var(--muted); margin:16px 0 2px; }
 
 .faq-list > section + section { margin-top:48px; }
 .faq-list > section > h2 { font-size:clamp(1.6rem,3vw,2.2rem); margin-bottom:24px; }
+
+/* Informational notice: no optional trackers are enabled. */
+.cookie-notice { max-height:70dvh; overflow-y:auto; }
+.cookie-notice h2 { font-family:inherit; font-size:1.05rem; margin:0 0 8px; }
+.cookie-notice p { font-size:.9rem; }
+.cookie-settings { background:none; border:0; padding:8px 0; color:inherit; text-decoration:underline; cursor:pointer; font:inherit; text-align:left; }
+.cookie-notice a { text-decoration:underline; }
+.contact-form input, .contact-form textarea { font-size:1rem; }
+@media(max-width:600px) { .cookie-notice .cookie-actions { grid-template-columns:1fr; } }

@@ -8,10 +8,13 @@ export const metadata: Metadata = {
 
 export default function Page(){
   return <><section className="page-hero"><div className="container narrow"><span className="eyebrow">Cookie</span><h1>Cookie Policy</h1><p className="lead">Il sito è configurato per limitare al minimo il tracciamento.</p></div></section><section className="section"><div className="container prose legal-copy">
-    <p><strong>Ultimo aggiornamento:</strong> 11 settembre 2026.</p>
+    <p><strong>Ultimo aggiornamento:</strong> 30 settembre 2026.</p>
     <h2>Quali cookie utilizza questo sito</h2>
     <p>Al momento il sito non utilizza cookie di profilazione, pixel pubblicitari o strumenti di analytics di terze parti come Google Analytics o Meta Pixel.</p>
-    <p>Possono essere presenti esclusivamente tecnologie tecniche strettamente necessarie al funzionamento, alla sicurezza, all’erogazione delle pagine o alla gestione dell’infrastruttura. Per questo motivo, nella configurazione attuale, non viene mostrato un banner di consenso per finalità opzionali.</p>
+    <p>Possono essere presenti esclusivamente tecnologie tecniche strettamente necessarie al funzionamento, alla sicurezza, all’erogazione delle pagine o alla gestione dell’infrastruttura. Il pannello informativo consente di confermare l’uso dei soli strumenti necessari o di chiudere l’avviso: entrambe le azioni mantengono la medesima configurazione, senza tracciamento opzionale. Il consenso non è richiesto per i cookie tecnici.</p>
+
+    <h2>Memoria della scelta</h2>
+    <p>Il cookie tecnico di prima parte <code>fc_cookie_notice</code> memorizza esclusivamente la versione dell’avviso chiuso (v1), per sei mesi, con percorso / e attributo SameSite=Lax; su HTTPS usa anche Secure. Non contiene nome, recapito, messaggi o identificatori pubblicitari. Puoi riaprire il pannello dal comando “Gestisci cookie” nel footer. Puoi cancellare il cookie dalle impostazioni del browser; l’avviso verrà mostrato nuovamente.</p>
 
     <h2>Hosting e dati tecnici</h2>
     <p>Il sito è ospitato su infrastruttura Vercel. Come avviene normalmente per i servizi web, il fornitore può trattare dati tecnici indispensabili per consegnare le pagine, prevenire abusi e mantenere la sicurezza del servizio.</p>

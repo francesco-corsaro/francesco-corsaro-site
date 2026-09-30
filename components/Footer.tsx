@@ -1,3 +1,4 @@
+import { CookieSettingsButton } from '@/components/CookieConsent';
 import Image from 'next/image';
 import Link from 'next/link';
 import { areas, nav, site } from '@/lib/site';
@@ -27,6 +28,7 @@ export function Footer() {
           <p>Email: <a href={`mailto:${site.email}`}>{site.email}</a></p>
           <Link href="/privacy">Privacy Policy</Link>
           <Link href="/cookie-policy">Cookie Policy</Link>
+          <CookieSettingsButton />
         </div>
       </div>
       <div className="container footer-bottom"><p>© {new Date().getFullYear()} Francesco Corsaro. Informazioni a carattere divulgativo: il sito non sostituisce una valutazione clinica individuale.</p></div>

@@ -12,6 +12,7 @@ export function validateContact(data: Record<string, unknown>) {
     values[key] = data[key].trim();
     if (!values[key] || values[key].length > limits[key]) return { error: 'Controlla la lunghezza dei campi compilati.' };
   }
+  if (/[\x00-\x1f\x7f]/.test(values.name + values.contact)) return { error: 'Nome o recapito non validi.' };
   if (!contactType(values.contact)) return { error: 'Inserisci un indirizzo email valido oppure un numero di telefono completo.' };
   if (values.message.length < 3) return { error: 'Scrivi un messaggio di almeno tre caratteri.' };
   if (data.privacy !== true) return { error: 'Conferma di aver letto l’informativa privacy.' };
