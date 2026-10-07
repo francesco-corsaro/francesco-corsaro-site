@@ -22,7 +22,8 @@ export function pageMetadata({ title, description, path, noIndex = false }: Page
   const indexable = isPublicSite && !noIndex;
 
   return {
-    title,
+    // The root layout's title template does not apply to its own page segment.
+    title: path === '/' ? { absolute: `${title} | Francesco Corsaro` } : title,
     description,
     alternates: { canonical: url },
     openGraph: {
