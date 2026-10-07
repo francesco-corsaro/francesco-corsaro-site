@@ -5,6 +5,14 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp']
   },
+  async redirects() {
+    return [{
+      source: '/:path*',
+      has: [{ type: 'host', value: 'francesco-corsaro-site.vercel.app' }],
+      destination: 'https://francescocorsaro.it/:path*',
+      permanent: true
+    }];
+  },
   async headers() {
     return [
       { source: '/api/:path*', headers: [{ key: 'Cache-Control', value: 'no-store' }] },
